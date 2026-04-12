@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anzeichen für Bipolarität — Checkliste</title>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#14b8a6">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg-primary:#0a0e1a;--bg-surface:#0f1424;--bg-card:#141a2e;--bg-hover:#1a2235;
+--accent:#14b8a6;--accent-glow:rgba(20,184,166,0.15);
+--text-primary:#e2e8f0;--text-secondary:#94a3b8;--text-muted:#64748b;
+--border:rgba(255,255,255,0.06);--border-accent:rgba(20,184,166,0.3);
+--success:#22c55e;--warning:#f59e0b;--danger:#ef4444;
+--radius:12px;--radius-sm:8px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg-primary);color:var(--text-primary);line-height:1.6;min-height:100vh;padding:0;margin:0}
+
+.hero{background:linear-gradient(135deg,#0f1424 0%,#141a2e 50%,#0f1424 100%);border-bottom:1px solid var(--border);padding:2rem 1.5rem;text-align:center}
+.hero h1{font-size:clamp(1.4rem,4vw,2rem);color:var(--accent);margin-bottom:0.4rem;font-family:'Georgia',serif}
+.hero .subtitle{font-size:clamp(0.9rem,2vw,1.05rem);color:#a78bfa;margin-bottom:0.5rem}
+.hero .desc{color:var(--text-secondary);font-size:0.85rem;max-width:700px;margin:0 auto 0.5rem}
+.hero .author{color:var(--text-muted);font-size:0.78rem}
+
+.container{max-width:800px;margin:0 auto;padding:1.5rem 1rem}
+
+.score-box{text-align:center;padding:1.5rem;border-radius:var(--radius);background:var(--bg-hover);margin-bottom:1.5rem;position:sticky;top:0;z-index:10;border:1px solid var(--border)}
+.score-number{font-size:2.8rem;font-weight:700;line-height:1;color:var(--accent);transition:color 0.3s}
+.score-label{font-size:0.85rem;color:var(--text-secondary);margin-top:0.25rem}
+.progress-bar{height:8px;background:var(--bg-primary);border-radius:4px;overflow:hidden;margin:0.75rem 0}
+.progress-fill{height:100%;border-radius:4px;transition:width 0.4s ease,background 0.3s;background:var(--success)}
+.score-interp{padding:0.75rem;border-radius:var(--radius-sm);font-size:0.88rem;font-weight:500;transition:all 0.3s}
+
+.category-label{color:#a78bfa;font-size:0.82rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin:1.25rem 0 0.5rem;padding-left:0.25rem}
+
+.checklist-item{display:flex;align-items:flex-start;gap:0.75rem;padding:0.75rem;border-radius:var(--radius-sm);border:1px solid var(--border);margin-bottom:0.5rem;cursor:pointer;transition:all 0.2s;user-select:none}
+.checklist-item:hover{border-color:var(--border-accent);background:var(--bg-hover)}
+.checklist-item.checked{border-color:var(--accent);background:var(--accent-glow)}
+.checklist-item input[type="checkbox"]{width:22px;height:22px;accent-color:var(--accent);cursor:pointer;flex-shrink:0;margin-top:2px}
+.item-text{flex:1;font-size:0.9rem;color:var(--text-primary)}
+.item-cat{font-size:0.75rem;color:var(--text-muted);margin-top:2px}
+.badge{display:inline-block;padding:0.1rem 0.5rem;border-radius:10px;font-size:0.68rem;font-weight:600;margin-left:0.5rem;vertical-align:middle}
+.badge-strong{background:rgba(239,68,68,0.2);color:#f87171}
+.badge-moderate{background:rgba(245,158,11,0.2);color:#fbbf24}
+.badge-mild{background:rgba(34,197,94,0.2);color:#4ade80}
+
+.interp-table{width:100%;border-collapse:collapse;font-size:0.82rem;margin-top:1rem}
+.interp-table th{background:var(--bg-hover);color:var(--accent);text-align:left;padding:0.6rem 0.75rem;border:1px solid var(--border);font-weight:600}
+.interp-table td{padding:0.55rem 0.75rem;border:1px solid var(--border);color:var(--text-primary)}
+.interp-table tr:hover td{background:var(--bg-hover)}
+
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-top:1.25rem}
+.card h3{color:var(--accent);font-size:1.1rem;margin-bottom:0.75rem;font-family:'Georgia',serif}
+
+.reset-btn{display:block;margin:1.5rem auto;padding:0.6rem 1.5rem;border-radius:var(--radius-sm);border:1px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer;font-size:0.85rem;font-weight:600;transition:all 0.2s}
+.reset-btn:hover{background:var(--accent-glow)}
+
+.footer{text-align:center;padding:1.5rem 1rem;color:var(--text-muted);font-size:0.75rem;border-top:1px solid var(--border);margin-top:2rem}
+
+@media(max-width:600px){
+  .hero{padding:1.25rem 1rem}
+  .container{padding:1rem 0.75rem}
+  .score-number{font-size:2.2rem}
+  .checklist-item{padding:0.6rem}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Anzeichen für Bipolarität</h1>
+  <div class="subtitle">Interaktive Checkliste — Selbsteinschätzung</div>
+  <div class="desc">Kreuzen Sie jede Aussage an, die auf Sie zutrifft. Die Punktzahl und Auswertung werden automatisch aktualisiert.</div>
+  <div class="author">Erstellt von Dr. Arnold Shapiro, MD — Facharzt für Psychiatrie mit über 35 Jahren klinischer Erfahrung</div>
+</div>
+
+<div class="container">
+
+  <div class="score-box" id="scoreBox">
+    <div class="score-number" id="scoreNumber">0 / 25</div>
+    <div class="score-label">Anzeichen für Bipolarität vorhanden</div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="score-interp" id="scoreInterp" style="background:rgba(34,197,94,0.1);color:var(--success)">
+      Geringe Wahrscheinlichkeit für Bipolarität
+    </div>
+  </div>
+
+  <div id="checklistContainer"></div>
+
+  <button class="reset-btn" onclick="resetAll()">↺ Zurücksetzen</button>
+
+  <div class="card">
+    <h3>Auswertungsleitfaden</h3>
+    <table class="interp-table">
+      <tr>
+        <th>Anzeichen</th>
+        <th>Klinische Bedeutung</th>
+        <th>Empfohlene Maßnahme</th>
+      </tr>
+      <tr>
+        <td>0–1</td>
+        <td>Geringe Wahrscheinlichkeit für Bipolarität</td>
+        <td>Standardbehandlung bei unipolarer Depression; weiter beobachten</td>
+      </tr>
+      <tr>
+        <td>2–3</td>
+        <td>Mögliche bipolare Störung — weitere Abklärung empfohlen</td>
+        <td>Screening-Tests durchführen; Fremdanamnese erheben</td>
+      </tr>
+      <tr>
+        <td>4–6</td>
+        <td>Wahrscheinliche bipolare Spektrumsstörung</td>
+        <td>Stimmungsstabilisierer in Betracht ziehen; keine Antidepressiva-Monotherapie; psychiatrische Überweisung</td>
+      </tr>
+      <tr>
+        <td>7+</td>
+        <td>Hohe Wahrscheinlichkeit für bipolare Störung</td>
+        <td>Als bipolar behandeln; Stimmungsstabilisierer einleiten; psychiatrische Konsultation</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="card" style="border-left:3px solid #f59e0b">
+    <h3 style="color:#f59e0b">⚠ Wichtiger Hinweis</h3>
+    <p style="font-size:0.85rem;color:var(--text-secondary)">
+      Diese Checkliste ist ein Screening-Instrument und ersetzt keine ärztliche Diagnose.
+      Sie basiert auf Kriterien der International Society for Bipolar Disorders (ISBD).
+      Bitte besprechen Sie Ihre Ergebnisse mit einem Facharzt für Psychiatrie.
+    </p>
+  </div>
+
+</div>
+
+<div class="footer">
+  Erstellt von Dr. Arnold Shapiro, MD — Facharzt für Psychiatrie — Cincinnati, OH<br>
+  Basierend auf ISBD-Kriterien für Anzeichen von Bipolarität<br>
+  Nur zu Informationszwecken — kein Ersatz für eine professionelle Diagnose
+</div>
+
+<script>
+const items = [
+  {text:"Bipolare Störung in der Familie (Verwandte 1. Grades)",cat:"Familiengeschichte",strength:"strong"},
+  {text:"Psychische Erkrankungen über mehrere Generationen in der Familie",cat:"Familiengeschichte",strength:"moderate"},
+  {text:"Suchterkrankungen in der Familie",cat:"Familiengeschichte",strength:"moderate"},
+  {text:"Suizid in der Familie",cat:"Familiengeschichte",strength:"moderate"},
+  {text:"Durch Antidepressiva ausgelöste Manie oder Hypomanie",cat:"Behandlungsverlauf",strength:"strong"},
+  {text:"Keine Besserung oder Verschlechterung unter Antidepressiva",cat:"Behandlungsverlauf",strength:"moderate"},
+  {text:"Anfängliches Ansprechen auf Antidepressiva, dann Wirkungsverlust",cat:"Behandlungsverlauf",strength:"moderate"},
+  {text:"Früher Beginn der Depression (vor dem 20. Lebensjahr)",cat:"Krankheitsverlauf",strength:"strong"},
+  {text:"Stimmungsepisoden nach der Geburt (postpartal)",cat:"Krankheitsverlauf",strength:"moderate"},
+  {text:"Häufig wiederkehrende depressive Episoden (mehr als 5 im Leben)",cat:"Krankheitsverlauf",strength:"strong"},
+  {text:"Kurze depressive Episoden (weniger als 3 Monate)",cat:"Krankheitsverlauf",strength:"moderate"},
+  {text:"Schneller Phasenwechsel (4+ Stimmungsepisoden pro Jahr)",cat:"Krankheitsverlauf",strength:"strong"},
+  {text:"Atypische Depressionssymptome (viel Schlaf, viel Essen, bleierne Schwere)",cat:"Symptomprofil",strength:"moderate"},
+  {text:"Psychomotorische Verlangsamung während der Depression",cat:"Symptomprofil",strength:"moderate"},
+  {text:"Psychotische Symptome während der Depression",cat:"Symptomprofil",strength:"strong"},
+  {text:"Saisonales Muster der Stimmungsepisoden",cat:"Symptomprofil",strength:"mild"},
+  {text:"Mischsymptome (Depression + Reizbarkeit/Unruhe/Gedankenrasen)",cat:"Symptomprofil",strength:"strong"},
+  {text:"Stimmungsschwankungen (schnelle Wechsel innerhalb von Tagen)",cat:"Symptomprofil",strength:"moderate"},
+  {text:"Begleitende Suchterkrankung",cat:"Begleiterkrankungen",strength:"moderate"},
+  {text:"Begleitende Angststörung",cat:"Begleiterkrankungen",strength:"mild"},
+  {text:"Suizidgedanken oder Suizidversuche",cat:"Risikofaktoren",strength:"moderate"},
+  {text:"Tagesschwankungen der Stimmung (morgens schlechter, abends besser)",cat:"Symptomprofil",strength:"mild"},
+  {text:"Gesteigerte Sexualität in gehobenen Phasen",cat:"Verhalten",strength:"strong"},
+  {text:"Impulsives Geldausgeben oder riskantes Verhalten",cat:"Verhalten",strength:"strong"},
+  {text:"Vermindertes Schlafbedürfnis ohne Müdigkeit",cat:"Verhalten",strength:"strong"}
+];
+
+const strengthLabels = {strong:"Stark",moderate:"Mittel",mild:"Leicht"};
+const catOrder = ["Familiengeschichte","Behandlungsverlauf","Krankheitsverlauf","Symptomprofil","Begleiterkrankungen","Risikofaktoren","Verhalten"];
+
+function render() {
+  const container = document.getElementById('checklistContainer');
+  let html = '';
+  let currentCat = '';
+
+  // Group items by category in order
+  const grouped = {};
+  items.forEach((item, i) => {
+    if (!grouped[item.cat]) grouped[item.cat] = [];
+    grouped[item.cat].push({...item, index: i});
+  });
+
+  catOrder.forEach(cat => {
+    if (!grouped[cat]) return;
+    html += `<div class="category-label">${cat}</div>`;
+    grouped[cat].forEach(item => {
+      const badgeClass = item.strength === 'strong' ? 'badge-strong' : item.strength === 'moderate' ? 'badge-moderate' : 'badge-mild';
+      html += `
+        <div class="checklist-item" data-index="${item.index}" onclick="toggle(this)">
+          <input type="checkbox" onclick="event.stopPropagation();" onchange="toggle(this.parentElement)">
+          <div class="item-text">
+            ${item.text}
+            <span class="badge ${badgeClass}">${strengthLabels[item.strength]}</span>
+          </div>
+        </div>`;
+    });
+  });
+
+  container.innerHTML = html;
+}
+
+function toggle(el) {
+  const cb = el.querySelector('input[type="checkbox"]');
+  if (el.classList.contains('checked')) {
+    el.classList.remove('checked');
+    cb.checked = false;
+  } else {
+    el.classList.add('checked');
+    cb.checked = true;
+  }
+  updateScore();
+}
+
+function updateScore() {
+  const checked = document.querySelectorAll('.checklist-item.checked').length;
+  const total = items.length;
+  const pct = (checked / total) * 100;
+
+  document.getElementById('scoreNumber').textContent = `${checked} / ${total}`;
+  document.getElementById('progressFill').style.width = pct + '%';
+
+  const interp = document.getElementById('scoreInterp');
+  const fill = document.getElementById('progressFill');
+  const num = document.getElementById('scoreNumber');
+
+  if (checked <= 1) {
+    interp.textContent = 'Geringe Wahrscheinlichkeit für Bipolarität';
+    interp.style.background = 'rgba(34,197,94,0.1)';
+    interp.style.color = 'var(--success)';
+    fill.style.background = 'var(--success)';
+    num.style.color = 'var(--accent)';
+  } else if (checked <= 3) {
+    interp.textContent = 'Mögliche bipolare Störung — weitere Abklärung empfohlen';
+    interp.style.background = 'rgba(245,158,11,0.1)';
+    interp.style.color = 'var(--warning)';
+    fill.style.background = 'var(--warning)';
+    num.style.color = 'var(--warning)';
+  } else if (checked <= 6) {
+    interp.textContent = 'Wahrscheinliche bipolare Spektrumsstörung';
+    interp.style.background = 'rgba(245,158,11,0.15)';
+    interp.style.color = '#fbbf24';
+    fill.style.background = 'linear-gradient(90deg, var(--warning), #fbbf24)';
+    num.style.color = '#fbbf24';
+  } else {
+    interp.textContent = 'Hohe Wahrscheinlichkeit für bipolare Störung';
+    interp.style.background = 'rgba(239,68,68,0.12)';
+    interp.style.color = '#f87171';
+    fill.style.background = 'linear-gradient(90deg, var(--danger), #f87171)';
+    num.style.color = '#f87171';
+  }
+}
+
+function resetAll() {
+  document.querySelectorAll('.checklist-item.checked').forEach(el => {
+    el.classList.remove('checked');
+    el.querySelector('input[type="checkbox"]').checked = false;
+  });
+  updateScore();
+}
+
+render();
+</script>
+</body>
+</html>
