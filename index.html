@@ -3262,7 +3262,7 @@ function getSwitchRec(currentMed) {
   <div class="card card-amber" style="margin-top:1rem">
     <h3>Anleitung zur Nutzung dieser Kurve</h3>
     <ul style="font-size:0.85rem;padding-left:1.2rem;line-height:1.8">
-      <li><strong>Während des Gesprächs:</strong> Fragen Sie „Wenn Sie auf das vergangene Jahr zurückblicken, können Sie mir Monat für Monat von Ihrer Stimmung berichten?" Klicken Sie auf die entsprechende Stimmungsebene für jeden Zeitraum.</li>
+      <li><strong>Während des Gesprächs:</strong> Fragen Sie &bdquo;Wenn Sie auf das vergangene Jahr zurückblicken, können Sie mir Monat für Monat von Ihrer Stimmung berichten?" Klicken Sie auf die entsprechende Stimmungsebene für jeden Zeitraum.</li>
       <li><strong>Auf Muster achten:</strong> Rapid Cycling (4+ Episoden/Jahr), saisonale Muster oder Korrelationen mit dem Medikamentenansprechen</li>
       <li><strong>Kontext hinzufügen:</strong> Markieren Sie, wann Medikamente begonnen/geändert wurden und wann wichtige Lebensereignisse stattfanden. Diese korrelieren oft mit Stimmungsschwankungen.</li>
       <li><strong>Fremdanamnese:</strong> Lassen Sie ein Familienmitglied die Kurve überprüfen &mdash; sie erinnern sich oft an Stimmungsepisoden, die der Patient vergessen hat</li>
@@ -3320,7 +3320,7 @@ function getSwitchRec(currentMed) {
 
   <div class="card" id="dashOverall" style="border:2px solid var(--success);text-align:center;margin-top:1rem">
     <h3 style="margin-bottom:0.5rem" id="dashOverallTitle">Gesamtbewertung: Bitte zuerst Screening-Tools ausfüllen</h3>
-    <p id="dashOverallText" style="font-size:0.9rem;color:var(--text-secondary)">Füllen Sie eines der obigen Bewertungstools aus und klicken Sie dann auf „Dashboard aktualisieren", um das integrierte Risikoprofil zu sehen.</p>
+    <p id="dashOverallText" style="font-size:0.9rem;color:var(--text-secondary)">Füllen Sie eines der obigen Bewertungstools aus und klicken Sie dann auf &bdquo;Dashboard aktualisieren", um das integrierte Risikoprofil zu sehen.</p>
   </div>
 </div>
 
@@ -3328,7 +3328,7 @@ function getSwitchRec(currentMed) {
 <div class="section" id="sec-handout">
   <div class="card card-accent">
     <h2>Personalisierter Patienten-Handout-Generator</h2>
-    <p>Erstellen Sie ein individuelles Informationsblatt zum Mitnehmen für Ihren Patienten basierend auf der spezifischen Diagnose und dem Behandlungsplan. Füllen Sie die Angaben unten aus und klicken Sie auf „Handout erstellen".</p>
+    <p>Erstellen Sie ein individuelles Informationsblatt zum Mitnehmen für Ihren Patienten basierend auf der spezifischen Diagnose und dem Behandlungsplan. Füllen Sie die Angaben unten aus und klicken Sie auf &bdquo;Handout erstellen".</p>
   </div>
 
   <div class="card card-purple">
@@ -3489,7 +3489,7 @@ const checklistData = [
   {feat:"Familiengeschichte von vollendetem Suizid",cat:"Familiengeschichte",strength:"moderate"},
   {feat:"Antidepressiva-induzierte Manie oder Hypomanie",cat:"Behandlungsansprechen",strength:"strong"},
   {feat:"Nichtansprechen auf Antidepressiva oder Verschlechterung unter Antidepressiva",cat:"Behandlungsansprechen",strength:"moderate"},
-  {feat:'Antidepressiva-„Wirkungsverlust" (anfängliches Ansprechen, dann Wirkverlust)',cat:"Behandlungsansprechen",strength:"moderate"},
+  {feat:'Antidepressiva-&bdquo;Wirkungsverlust" (anfängliches Ansprechen, dann Wirkverlust)',cat:"Behandlungsansprechen",strength:"moderate"},
   {feat:"Frühes Erkrankungsalter der Depression (vor dem 20. Lebensjahr)",cat:"Krankheitsverlauf",strength:"strong"},
   {feat:"Postpartaler Beginn von Stimmungsepisoden",cat:"Krankheitsverlauf",strength:"moderate"},
   {feat:"Hochrezidivierende depressive Episoden (>5 im Leben)",cat:"Krankheitsverlauf",strength:"strong"},
@@ -3620,7 +3620,7 @@ const biDomains = [
   ]},
   {name:"Behandlungsansprechen (0-20 Punkte)",items:[
     {text:"Antidepressiva-induzierte Manie/Hypomanie ODER positives Ansprechen auf Stimmungsstabilisator",pts:20},
-    {text:"Mehrfaches Versagen von Antidepressiva ODER Antidepressiva-„Wirkungsverlust"",pts:15},
+    {text:"Mehrfaches Versagen von Antidepressiva ODER Antidepressiva-&bdquo;Wirkungsverlust&rdquo;",pts:15},
     {text:"Teilweises Ansprechen auf Antidepressiva ODER Verschlechterung unter Antidepressiva",pts:10},
     {text:"Ausreichendes Ansprechen auf Antidepressiva, aber mit etwas Aktivierung/Agitiertheit",pts:5},
     {text:"Gutes, anhaltendes Ansprechen auf Antidepressiva",pts:0}
@@ -3733,7 +3733,7 @@ const patientData = [
   "Ich fühlte mich kreativ, hatte große Pläne oder das Gefühl, alles sei möglich",
   "Andere Leute bemerkten, dass ich anders war, und kommentierten mein Verhalten",
   "Diese Phasen wechselten sich mit Zeiten der Depression oder Niedergeschlagenheit ab",
-  'Ein Antidepressivum machte mich einmal „aufgedreht", agitiert oder ungewöhnlich energiegeladen'
+  'Ein Antidepressivum machte mich einmal &bdquo;aufgedreht", agitiert oder ungewöhnlich energiegeladen'
 ];
 
 function renderPatient(){
@@ -3789,8 +3789,8 @@ function updateMixed(){
   const checked = document.querySelectorAll('#mixedItems .checklist-item.checked').length;
   document.querySelector('#mixedScore .score-number').textContent = checked + ' / 7';
   const interp = document.getElementById('mixedInterp');
-  if(checked < 3){interp.style.background='rgba(34,197,94,0.1)';interp.style.color='var(--success)';interp.textContent='Schwelle für Zusatzkodierung „mit gemischten Merkmalen" nicht erreicht ('+checked+' von 7; 3+ erforderlich)';}
-  else{interp.style.background='rgba(239,68,68,0.1)';interp.style.color='var(--danger)';interp.textContent='ERFÜLLT DSM-5-ZUSATZKODIERUNG „MIT GEMISCHTEN MERKMALEN" — '+checked+' manische/hypomanische Symptome während depressiver Episode. Höchstes Suizidrisiko. Antidepressiva-Monotherapie vermeiden. Stimmungsstabilisator indiziert.';}
+  if(checked < 3){interp.style.background='rgba(34,197,94,0.1)';interp.style.color='var(--success)';interp.textContent='Schwelle für Zusatzkodierung &bdquo;mit gemischten Merkmalen" nicht erreicht ('+checked+' von 7; 3+ erforderlich)';}
+  else{interp.style.background='rgba(239,68,68,0.1)';interp.style.color='var(--danger)';interp.textContent='ERFÜLLT DSM-5-ZUSATZKODIERUNG &bdquo;MIT GEMISCHTEN MERKMALEN" — '+checked+' manische/hypomanische Symptome während depressiver Episode. Höchstes Suizidrisiko. Antidepressiva-Monotherapie vermeiden. Stimmungsstabilisator indiziert.';}
 }
 function resetMixed(){document.querySelectorAll('#mixedItems .checklist-item').forEach(el=>{el.classList.remove('checked');el.querySelector('input').checked=false});updateMixed();}
 
@@ -3800,7 +3800,7 @@ const redFlagData = [
   {feat:"Mehrfaches Versagen von Antidepressiva (2+ adäquate Versuche)",pts:4,sig:"Sehr hoch — stärkster klinischer Prädiktor für Bipolarität"},
   {feat:"Antidepressiva-induzierte Hypomanie/Manie",pts:5,sig:"Diagnostisch — bestätigt bipolares Spektrum gemäß ISBD-Kriterien"},
   {feat:"Verschlechterung der Depression unter Antidepressiva",pts:3,sig:"Hoch — häufiger mit SSRIs und SNRIs bei bipolarer Störung"},
-  {feat:'Anfängliches Ansprechen gefolgt von „Wirkungsverlust"',pts:2,sig:"Mäßig bis hoch — deutet auf Stimmungsdestabilisierung hin"},
+  {feat:'Anfängliches Ansprechen gefolgt von &bdquo;Wirkungsverlust"',pts:2,sig:"Mäßig bis hoch — deutet auf Stimmungsdestabilisierung hin"},
   {feat:"Agitiertheit, Insomnie oder Reizbarkeit unter Antidepressiva",pts:2,sig:"Mäßig — kann auf gemischten Zustand oder unterschwellige Manie hinweisen"},
   {feat:"Erhöhte Suizidalität unter Antidepressiva",pts:4,sig:"Sehr hoch — erfordert sofortige Neubewertung auf Bipolarität"},
   {feat:"Rapid Cycling nach Beginn der Antidepressiva-Therapie",pts:3,sig:"Hoch — Antidepressiva-induzierte Zyklusbeschleunigung"},
@@ -3961,7 +3961,7 @@ const substanceGuidance = {
     title: 'Alkohol + Bipolare Bewertung',
     content: `<p style="margin-bottom:0.5rem"><strong>Zentrale Herausforderung:</strong> Alkoholentzug imitiert Manie (Agitiertheit, Insomnie, Größenideen). Chronischer Konsum verursacht Depressionen, die wie bipolare Depression aussehen.</p>
     <p style="margin-bottom:0.5rem"><strong>Diagnostische Hinweise FÜR Bipolarität:</strong></p>
-    <ul style="padding-left:1.2rem;margin-bottom:0.5rem"><li>Stimmungsepisoden, die dem Alkoholkonsum deutlich VORAUSGEHEN</li><li>Stimmungsinstabilität während anhaltender Nüchternheit</li><li>Familiengeschichte bipolarer Störung (stärkster Indikator)</li><li>Patient trinkt MEHR, wenn er sich „oben" fühlt (Selbstmedikation der Manie)</li></ul>
+    <ul style="padding-left:1.2rem;margin-bottom:0.5rem"><li>Stimmungsepisoden, die dem Alkoholkonsum deutlich VORAUSGEHEN</li><li>Stimmungsinstabilität während anhaltender Nüchternheit</li><li>Familiengeschichte bipolarer Störung (stärkster Indikator)</li><li>Patient trinkt MEHR, wenn er sich &bdquo;oben" fühlt (Selbstmedikation der Manie)</li></ul>
     <p style="margin-bottom:0.5rem"><strong>Behandlungsüberlegung:</strong> Valproat (Depakote) hat Evidenz sowohl für bipolare Störung ALS AUCH Alkoholkonsumstörung. Lithium ist wirksam, erfordert aber zuverlässiges Monitoring (Bedenken bei chaotischem Alkoholkonsum). Quetiapin bei aktivem Alkoholkonsum vermeiden (additive Sedierung, Sturzrisiko).</p>
     <p><strong>Bestes Bewertungsfenster:</strong> 2&ndash;4 Wochen Nüchternheit, nach Abklingen des Entzugs.</p>`
   },
@@ -3977,7 +3977,7 @@ const substanceGuidance = {
     title: 'Stimulanzien + Bipolare Bewertung',
     content: `<p style="margin-bottom:0.5rem"><strong>Zentrale Herausforderung:</strong> Stimulanzien-Intoxikation IST Manie (Größenideen, verminderter Schlaf, Impulsivität, Rededrang). Der Post-Stimulanzien-Absturz IST Depression. Dies macht die Diagnose während aktivem Konsum nahezu unmöglich.</p>
     <p style="margin-bottom:0.5rem"><strong>Diagnostische Hinweise FÜR Bipolarität:</strong></p>
-    <ul style="padding-left:1.2rem;margin-bottom:0.5rem"><li>Manische Symptome, die der Stimulanzien-Konsum-Geschichte VORAUSGEHEN</li><li>Stimmungsschwankungen während anhaltender Nüchternheit (4+ Wochen ideal bei Stimulanzien)</li><li>Familiengeschichte bipolarer Störung</li><li>„Ich begann mit Kokain/Meth, weil ich mich sowieso schon großartig fühlte"</li></ul>
+    <ul style="padding-left:1.2rem;margin-bottom:0.5rem"><li>Manische Symptome, die der Stimulanzien-Konsum-Geschichte VORAUSGEHEN</li><li>Stimmungsschwankungen während anhaltender Nüchternheit (4+ Wochen ideal bei Stimulanzien)</li><li>Familiengeschichte bipolarer Störung</li><li>&bdquo;Ich begann mit Kokain/Meth, weil ich mich sowieso schon großartig fühlte"</li></ul>
     <p style="margin-bottom:0.5rem"><strong>Behandlungsüberlegung:</strong> KEINE Stimulanzien verschreiben (einschließlich ADHS-Medikamente), bis Bipolarität ausgeschlossen oder stabilisiert ist. Stimmungsstabilisator zuerst. Bei komorbider ADHS Stimulanzien NUR hinzufügen, nachdem die Stimmung stabil ist. Quetiapin ist oft hilfreich (behandelt sowohl Manie als auch Insomnie durch Stimulanzienkonsum).</p>
     <p><strong>Bestes Bewertungsfenster:</strong> 4+ Wochen Nüchternheit (Stimulanzien-Effekte auf die Stimmung halten länger an als bei Alkohol).</p>`
   },
