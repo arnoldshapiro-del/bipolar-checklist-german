@@ -3789,8 +3789,8 @@ function updateMixed(){
   const checked = document.querySelectorAll('#mixedItems .checklist-item.checked').length;
   document.querySelector('#mixedScore .score-number').textContent = checked + ' / 7';
   const interp = document.getElementById('mixedInterp');
-  if(checked < 3){interp.style.background='rgba(34,197,94,0.1)';interp.style.color='var(--success)';interp.textContent='Schwelle für Zusatzkodierung &bdquo;mit gemischten Merkmalen" nicht erreicht ('+checked+' von 7; 3+ erforderlich)';}
-  else{interp.style.background='rgba(239,68,68,0.1)';interp.style.color='var(--danger)';interp.textContent='ERFÜLLT DSM-5-ZUSATZKODIERUNG &bdquo;MIT GEMISCHTEN MERKMALEN" — '+checked+' manische/hypomanische Symptome während depressiver Episode. Höchstes Suizidrisiko. Antidepressiva-Monotherapie vermeiden. Stimmungsstabilisator indiziert.';}
+  if(checked < 3){interp.style.background='rgba(34,197,94,0.1)';interp.style.color='var(--success)';interp.textContent='Schwelle f\u00FCr Zusatzkodierung \u201Emit gemischten Merkmalen\u201C nicht erreicht ('+checked+' von 7; 3+ erforderlich)';}
+  else{interp.style.background='rgba(239,68,68,0.1)';interp.style.color='var(--danger)';interp.textContent='ERF\u00DCLLT DSM-5-ZUSATZKODIERUNG \u201EMIT GEMISCHTEN MERKMALEN\u201C \u2014 '+checked+' manische/hypomanische Symptome w\u00E4hrend depressiver Episode. H\u00F6chstes Suizidrisiko. Antidepressiva-Monotherapie vermeiden. Stimmungsstabilisator indiziert.';}
 }
 function resetMixed(){document.querySelectorAll('#mixedItems .checklist-item').forEach(el=>{el.classList.remove('checked');el.querySelector('input').checked=false});updateMixed();}
 
