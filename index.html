@@ -262,7 +262,6 @@ tr:hover td{background:var(--bg-hover)}
 .lc-cell.active-1{background:var(--info)}
 .lc-cell.active-0{background:var(--purple)}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
 </head>
 <body>
 
@@ -3932,6 +3931,108 @@ function copySummary(){
 }
 function closeSummary(){
   document.getElementById('summaryNote').value = '';
+}
+
+// ========== PDF-BERICHT HERUNTERLADEN ==========
+function downloadToolPDF(tool) {
+  const date = new Date().toLocaleDateString('de-DE', {year:'numeric',month:'long',day:'numeric'});
+  let title = '', items = [], score = '', interp = '', maxScore = '';
+
+  if (tool === 'checklist') {
+    title = 'Anzeichen-Checkliste für Bipolarität';
+    const checked = document.querySelectorAll('#checklistItems .checklist-item.checked');
+    score = checked.length + ' / 25';
+    interp = document.getElementById('checklistInterp').textContent;
+    checked.forEach(el => items.push(el.querySelector('.feat').textContent.replace(/^\d+\.\s*/,'')));
+  } else if (tool === 'rms') {
+    title = 'Schnell-Stimmungsscreener (RMS)';
+    const checked = document.querySelectorAll('#rmsItems .checklist-item.checked');
+    score = checked.length + ' / 6';
+    interp = document.getElementById('rmsInterp').textContent;
+    checked.forEach(el => items.push(el.querySelector('.feat').textContent));
+  } else if (tool === 'bi') {
+    title = 'Bipolaritätsindex';
+    let total = 0;
+    biDomains.forEach((d,di) => {
+      const sel = document.querySelector('input[name="bi_domain_'+di+'"]:checked');
+      if (sel) {
+        total += parseInt(sel.value);
+        const item = sel.closest('.checklist-item');
+        if (item) items.push(d.name.replace(/ \(.*\)/,'') + ': ' + item.querySelector('.feat').textContent);
+      }
+    });
+    score = total + ' / 100';
+    interp = document.getElementById('biInterp').textContent;
+  } else if (tool === 'digfast') {
+    title = 'DIG FAST — Hypomanie-Screening';
+    const checked = document.querySelectorAll('#digfastItems .checklist-item.checked');
+    score = checked.length + ' / 7';
+    interp = document.getElementById('digfastInterp').textContent;
+    checked.forEach(el => items.push(el.querySelector('.feat').textContent));
+  } else if (tool === 'patient') {
+    title = 'Patienten-Selbstbeurteilung';
+    const checked = document.querySelectorAll('#patientItems .checklist-item.checked');
+    score = checked.length + ' / 16';
+    interp = document.getElementById('patientInterp').textContent;
+    checked.forEach(el => items.push(el.querySelector('.feat').textContent));
+  } else if (tool === 'mixed') {
+    title = 'Screening auf gemischte Merkmale (DSM-5)';
+    const checked = document.querySelectorAll('#mixedItems .checklist-item.checked');
+    score = checked.length + ' / 7';
+    interp = document.getElementById('mixedInterp').textContent;
+    checked.forEach(el => items.push(el.querySelector('.feat').textContent));
+  } else if (tool === 'redflag') {
+    title = 'Warnzeichen-Muster-Analyse';
+    let total = 0;
+    document.querySelectorAll('#redFlagItems .checklist-item').forEach((el,i) => {
+      if (el.classList.contains('checked')) {
+        total += redFlagData[i].pts;
+        items.push(el.querySelector('.feat').textContent);
+      }
+    });
+    score = total + ' Punkte';
+    interp = document.getElementById('redFlagInterp').textContent;
+  }
+
+  const itemsHtml = items.length > 0
+    ? '<ul style="margin:0;padding-left:1.2rem">' + items.map(i => '<li style="margin-bottom:4px">' + i + '</li>').join('') + '</ul>'
+    : '<p style="color:#888;font-style:italic">Keine Elemente ausgewählt.</p>';
+
+  const interpColor = interp.toLowerCase().includes('positiv') || interp.toLowerCase().includes('hoch') || interp.toLowerCase().includes('erfüllt') || interp.toLowerCase().includes('stark') ? '#b91c1c'
+    : interp.toLowerCase().includes('möglich') || interp.toLowerCase().includes('wahrscheinlich') || interp.toLowerCase().includes('mäßig') ? '#92400e'
+    : '#166534';
+
+  const win = window.open('', '_blank');
+  win.document.write(`<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8">
+<title>${title} — Bericht</title>
+<style>
+  body{font-family:Georgia,serif;max-width:720px;margin:40px auto;padding:0 20px;color:#1e293b;font-size:14px;line-height:1.7}
+  h1{font-size:20px;color:#0f766e;border-bottom:2px solid #0f766e;padding-bottom:8px;margin-bottom:4px}
+  h2{font-size:15px;color:#334155;margin:20px 0 6px}
+  .meta{color:#64748b;font-size:12px;margin-bottom:24px}
+  .score-box{background:#f0fdf4;border:2px solid #0f766e;border-radius:8px;padding:14px 18px;margin:16px 0;display:flex;align-items:center;gap:20px}
+  .score-num{font-size:28px;font-weight:700;color:#0f766e;min-width:80px}
+  .interp{background:#fefce8;border-left:4px solid;border-color:${interpColor};padding:12px 16px;border-radius:0 6px 6px 0;margin:12px 0;color:${interpColor};font-weight:600;font-size:13px}
+  .items-section{margin-top:16px}
+  li{margin-bottom:4px}
+  .footer{margin-top:40px;padding-top:16px;border-top:1px solid #e2e8f0;color:#94a3b8;font-size:11px;text-align:center}
+  @media print{body{margin:20px}}
+</style></head><body>
+<h1>${title}</h1>
+<div class="meta">Datum: ${date} &nbsp;|&nbsp; Erstellt von: Dr. Arnold Shapiro, MD &nbsp;|&nbsp; Bipolar-Spektrum Diagnostik-Leitfaden</div>
+<h2>Ergebnis</h2>
+<div class="score-box"><div class="score-num">${score}</div><div>Positive / ausgewählte Elemente</div></div>
+<div class="interp">${interp}</div>
+<div class="items-section">
+<h2>Ausgewählte Elemente (${items.length})</h2>
+${itemsHtml}
+</div>
+<div class="footer">Dr. Arnold Shapiro, MD &mdash; Facharzt für Psychiatrie, 35+ Jahre klinische Erfahrung<br>
+Nur zur klinischen Entscheidungsunterstützung &mdash; ersetzt nicht das professionelle medizinische Urteil.</div>
+</body></html>`);
+  win.document.close();
+  win.focus();
+  setTimeout(() => win.print(), 500);
 }
 
 // ========== INIT ==========
